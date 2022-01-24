@@ -1,11 +1,12 @@
 <?php
 /*
-Plugin Name: Intend
-Plugin URI:  http://intend.uz
-Description: Intend Checkout Plugin for WooCommerce
-Version: 0.1
-Author: support@intend.uz
-Text Domain: intend
+ * Plugin Name: Intend
+ * Plugin URI:  https://github.com/akbarali1/intend-pay-wordpress-woocommerce
+ * Description: Intend Checkout Plugin for WooCommerce
+ * Version: 0.2
+ * Author: Akbarali
+ * Author URI: https://github.com/akbarali1
+ * Text Domain: intend
  */
 
 // Prevent direct access
