@@ -53,7 +53,7 @@ class Intend
 
     }
 
-    public function order_check($order_id, $api_key): bool
+    public function orderCheck($order_id, $api_key): bool
     {
         if (!is_numeric($order_id)) {
             return false;

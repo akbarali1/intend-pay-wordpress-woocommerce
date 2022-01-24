@@ -17,19 +17,27 @@ add_action('plugins_loaded', 'woocommerce_intend', 0);
 function webhook_intend()
 {
     $api = new WC_INTEND();
+    $order = wc_get_order($_GET['id']);
 
-    $order_check = (new \Intend\Intend())->order_check($_GET['order_id'], $api->api_key);
+    if (!isset($_GET['order_id'])) {
+        $order->update_status('failed');
+        $order->save();
+        wp_redirect($order->get_cancel_order_url());
+        exit;
+    }
+    $order_check = (new \Intend\Intend())->orderCheck($_GET['order_id'], $api->api_key);
+
     if ($order_check) {
-        $order = wc_get_order($_GET['id']);
         $order->payment_complete();
         $order->add_order_note('Intend payment successful');
         $order->update_status('processing');
+        $order->save();
         wp_redirect($order->get_checkout_order_received_url());
         exit;
     } else {
-        $order = wc_get_order($_GET['id']);
         $order->update_status('failed');
-        wp_redirect($order->get_checkout_order_received_url());
+        $order->save();
+        wp_redirect($order->get_cancel_order_url());
         exit;
     }
 }
