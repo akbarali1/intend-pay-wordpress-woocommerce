@@ -107,10 +107,10 @@ function woocommerce_intend()
 
             <p><?php _e('Configure checkout settings', 'intend'); ?></p>
 
-            <p>
-                <strong><?php _e('Your Web Cash Endpoint URL to handle requests is:', 'intend'); ?></strong>
-                <em><?= site_url('/?wc-api=wc_intend'); ?></em>
-            </p>
+            <!--            <p>-->
+            <!--                <strong>--><?php //_e('Your Web Cash Endpoint URL to handle requests is:', 'intend'); ?><!--</strong>-->
+            <!--                <em>--><?//= site_url('/?wc-api=wc_intend');  ?><!--</em>-->
+            <!--            </p>-->
 
             <table class="form-table">
                 <?php $this->generate_settings_html(); ?>
@@ -139,7 +139,6 @@ function woocommerce_intend()
         public function generate_form($order_id)
         {
             // get order by id
-
             $order = wc_get_order($order_id);
             // Get and Loop Over Order Items
 
@@ -180,7 +179,6 @@ function woocommerce_intend()
 <a class="button cancel" href="{$order->get_cancel_order_url()}">$label_cancel</a>
 </form>
 FORM;
-
             return $form;
         }
 
