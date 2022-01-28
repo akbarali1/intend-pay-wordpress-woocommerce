@@ -1,1 +1,1 @@
-Tezt orada qo'shiladi
+Tezt orada qo'shiladi.
