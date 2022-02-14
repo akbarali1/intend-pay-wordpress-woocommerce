@@ -162,7 +162,7 @@ function woocommerce_intend()
                 $i++;
                 $html_form .= '<input type="hidden" name="products[' . $i . '][id]" value="' . $item->get_product_id() . '">';
                 $html_form .= '<input type="hidden" name="products[' . $i . '][name]" value="' . $item->get_name() . '">';
-                $html_form .= '<input type="hidden" name="products[' . $i . '][price]" value="' . $item->get_total() . '">';
+                $html_form .= '<input type="hidden" name="products[' . $i . '][price]" value="' . ( $item->get_total() / $item->get_quantity() ) . '">';
                 $html_form .= '<input type="hidden" name="products[' . $i . '][quantity]" value="' . $item->get_quantity() . '">';
                 $html_form .= '<input type="hidden" name="products[' . $i . '][sku]" value="sku_' . $item->get_product_id() . '">';
                 $html_form .= '<input type="hidden" name="products[' . $i . '][weight]" value="0">';
