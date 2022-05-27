@@ -28,3 +28,8 @@ Sundan so'ng Wordpress adminkasiga kirib Dobavit Noviyni bosasiz
 7. To'lov qilib bo'lganingizdan song chiqadigan oyna. ![image](https://user-images.githubusercontent.com/39323182/170645970-ad1e64db-b8be-40d1-9ef6-2bf91d2327d6.png)
 8. Saytga qaytish ni bosasiz. 
 9. Заказ принят degan yozuv chiqsa hammasi joyida va hammasi yaxshi ishlamoqda. ![image](https://user-images.githubusercontent.com/39323182/170646101-9f4c2a8e-1900-49f3-be93-4bf8b5f36690.png)
+
+
+# Test qilib ko'rilgan versiya
+Wordpress 5.9.3
+WooCommerce 6.2.2
