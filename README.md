@@ -6,7 +6,7 @@ Kodni ziplab yuklab olasiz.
 ![image](https://user-images.githubusercontent.com/39323182/170641987-bd6f938e-8bda-4977-9682-2743b151f5b7.png)
 
 
-Sundan so'ng Wordpress adminkasiga kirib Dobavit Noviyni bosasiz
+Shundan so'ng Wordpress adminkasiga kirib Dobavit Noviyni bosasiz
 ![image](https://user-images.githubusercontent.com/39323182/170642120-b04406b1-bef2-4c8e-855b-e329b54fbc69.png)
 
 1. Shuni bosasiz. ![image](https://user-images.githubusercontent.com/39323182/170642202-b5cc1aba-bc6b-4efd-994a-a70cfde763c7.png)
