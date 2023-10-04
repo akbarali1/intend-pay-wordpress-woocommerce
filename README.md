@@ -1,3 +1,4 @@
+![image info](https://raw.githubusercontent.com/akbarali1/intend-pay-wordpress-woocommerce/main/intend.png)
 
 # O'rnatish bo'yicha qo'lanma
 
