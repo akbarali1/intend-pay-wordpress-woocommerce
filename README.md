@@ -1,6 +1,6 @@
-![image info](https://raw.githubusercontent.com/akbarali1/intend-pay-wordpress-woocommerce/main/intend.png)
 
-# O'rnatish bo'yicha qo'lanma
+
+# ![image info](https://raw.githubusercontent.com/akbarali1/intend-pay-wordpress-woocommerce/main/intend.png) Plaginini o'rnatish bo'yicha qo'lanma
 
 Kodni ziplab yuklab olasiz.
 
