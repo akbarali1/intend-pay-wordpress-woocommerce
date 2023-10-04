@@ -1,7 +1,7 @@
 Авторов плагин
 
 Lead Developer
-Игамбердиев Бахтиёр Хабибулаевич
+Akbarali
 
 Project Manager
 
