@@ -120,6 +120,7 @@ function woocommerce_intend()
             
             $this->title       = $this->fetch_itend_price();
             // Populate options from the saved settings
+            $this->api_key = $this->get_option('api_key');
             //            $this->checkout_url = $this->get_option('checkout_url');
             //            $this->return_url = $this->get_option('return_url');
 
