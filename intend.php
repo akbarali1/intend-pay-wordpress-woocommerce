@@ -429,12 +429,12 @@ FORM;
 
                     if ($data['success']) {
                         $per_month = number_format($data['data']['items'][0]['per_month'], 0, '.', ' ');
-                        $description = '<span><span class="intend_price_checkout">' . $per_month . "</span> so'mdan/oyiga</span>";
+                        $description = '<span><span class="intend_price_checkout">' . $per_month . "</span> UZS per month</span>";
                     } else {
-                        $description = 'Ошибка загрузки цены';
+                        $description = 'Error while getting the price';
                     }
                 } else {
-                    $description = 'Что-то пошло не так';
+                    $description = 'Something went wrong';
                 }
 
                 return __($description, 'intend');
