@@ -218,7 +218,7 @@ function woocommerce_intend()
 <input type="hidden" name="duration" value="12">
 <input type="hidden" name="plugin_version" value="0.6">
 <input type="hidden" name="order_id" value="$order_id">
-<input type="hidden" name="api_key" value="$this->api_key ">
+<input type="hidden" name="api_key" value="{trim($this->api_key)}">
 <input type="hidden" name="redirect_url" value="{$callbackUrl}">
 {$html_form}
 <hr />
