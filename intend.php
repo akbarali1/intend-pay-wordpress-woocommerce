@@ -110,15 +110,15 @@ function woocommerce_intend()
         public function __construct()
         {
             $plugin_dir        = plugin_dir_url(__FILE__);
+            $this->api_key = $this->get_option('api_key');
             $this->id          = 'intend';
-            $this->title       = 'Intend';
-            $this->description = __("Intend orqali to'lash", 'intend');
             $this->icon        = apply_filters('woocommerce_intend_icon', ''.$plugin_dir.'intend.png');
             $this->has_fields  = false;
-
+            
             $this->init_form_fields();
             $this->init_settings();
-
+            
+            $this->title       = $this->fetch_itend_price();
             // Populate options from the saved settings
             $this->api_key = $this->get_option('api_key');
             //            $this->checkout_url = $this->get_option('checkout_url');
@@ -127,6 +127,7 @@ function woocommerce_intend()
             add_action('woocommerce_receipt_'.$this->id, [$this, 'receipt_page']);
             add_action('woocommerce_update_options_payment_gateways_'.$this->id, [$this, 'process_admin_options']);
             add_action('woocommerce_api_wc_'.$this->id, [$this, 'callback']);
+            add_action('wp_enqueue_scripts', array($this, 'enqueue_intend_scripts'));
         }
 
         function showMessage($content)
@@ -403,6 +404,48 @@ FORM;
             }
         }
 
+        private function fetch_itend_price() {     
+            if(isset(WC()->cart)) {
+                $total_price_cart = WC()->cart->total;
+                $api_key = $this->get_option('api_key'); 
+    
+                $url = "https://pay.intend.uz/api/v1/front/calculate?api_key=" . $api_key . "&price=" . $total_price_cart;
+
+                $options = [
+                    'http' => [
+                        'method' => 'GET',
+                        'header' => [
+                            'Content-Type: application/json',
+                            'Accept: application/json',
+                        ],
+                    ],
+                ];
+
+                $context = stream_context_create($options);
+                $response = file_get_contents($url, false, $context);
+
+                if ($response !== false) {
+                    $data = json_decode($response, true);
+
+                    if ($data['success']) {
+                        $per_month = number_format($data['data']['items'][0]['per_month'], 0, '.', ' ');
+                        $description = '<span><span class="intend_price_checkout">' . $per_month . "</span> UZS per month</span>";
+                    } else {
+                        $description = 'Error while getting the price';
+                    }
+                } else {
+                    $description = 'Something went wrong';
+                }
+
+                return __($description, 'intend');
+            } else {
+                return __('Intend', 'intend');
+            }
+        }
+
+        public function enqueue_intend_scripts() {
+            wp_enqueue_script('intend-script', plugins_url('/js/intend.js', __FILE__), array('jquery'), '1.0.0', true);
+        }
     }
 
     function add_intend_gateway($methods)
