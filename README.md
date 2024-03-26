@@ -31,6 +31,6 @@ Shundan so'ng Wordpress adminkasiga kirib Dobavit Noviyni bosasiz
 9. Заказ принят degan yozuv chiqsa hammasi joyida va hammasi yaxshi ishlamoqda. ![image](https://user-images.githubusercontent.com/39323182/170646101-9f4c2a8e-1900-49f3-be93-4bf8b5f36690.png)
 
 
-# Test qilib ko'rilgan versiya
-Wordpress 5.9.3
-WooCommerce 6.2.2
+# Ishlaydigan versiya
+Wordpress 6.4.3
+WooCommerce 8.7.0
