@@ -3,7 +3,7 @@
  * Plugin Name: Intend Payment Plugin
  * Plugin URI:  https://github.com/akbarali1/intend-pay-wordpress-woocommerce
  * Description: Intend Checkout Plugin for WooCommerce
- * Version: 0.6
+ * Version: 0.7
  * Author: Akbarali
  * Author URI: https://github.com/akbarali1
  * Text Domain: intend
@@ -216,7 +216,7 @@ function woocommerce_intend()
             $form = <<<FORM
 <form action="https://pay.intend.uz" method="POST" id="intend_form">
 <input type="hidden" name="duration" value="12">
-<input type="hidden" name="plugin_version" value="0.6">
+<input type="hidden" name="plugin_version" value="0.7">
 <input type="hidden" name="order_id" value="$order_id">
 <input type="hidden" name="api_key" value="{trim($this->api_key)}">
 <input type="hidden" name="redirect_url" value="{$callbackUrl}">
