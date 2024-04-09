@@ -194,7 +194,7 @@ function woocommerce_intend()
             $sum = number_format($sum, 0, '.', '');
 
             $lang_codes = ['ru_RU' => 'ru', 'en_US' => 'en', 'uz_UZ' => 'uz'];
-            $lang       = isset($lang_codes[get_locale()]) ? $lang_codes[get_locale()] : 'en';
+            $lang       = $lang_codes[get_locale()] ?? 'en';
 
             $label_pay    = __('Pay', 'intend');
             $label_cancel = __('Cancel payment and return back', 'intend');
@@ -203,6 +203,7 @@ function woocommerce_intend()
 
             $html_form = '';
             $i         = 0;
+            $apiKey    = trim($this->api_key);
             foreach ($order->get_items() as $item_id => $item) {
                 $i++;
                 $html_form .= '<input type="hidden" name="products['.$i.'][id]" value="'.$item->get_product_id().'">';
@@ -218,7 +219,7 @@ function woocommerce_intend()
 <input type="hidden" name="duration" value="12">
 <input type="hidden" name="plugin_version" value="0.7">
 <input type="hidden" name="order_id" value="$order_id">
-<input type="hidden" name="api_key" value="{trim($this->api_key)}">
+<input type="hidden" name="api_key" value="{$apiKey}">
 <input type="hidden" name="redirect_url" value="{$callbackUrl}">
 {$html_form}
 <hr />
