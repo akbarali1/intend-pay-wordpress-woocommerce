@@ -27,7 +27,6 @@ function callbackIntend()
     $status      = $all_request['status'];
     $message     = $all_request['message'];
     $order       = wc_get_order($order_id);
-
     if ($api_key !== $api->api_key) {
         return wp_send_json_error('Invalid API Key');
     }
@@ -47,13 +46,13 @@ function callbackIntend()
         $order->save();
 
         return wp_send_json_success('Payment successful');
-    } else {
-        $order->add_order_note($message ?? 'Intend payment failed');
-        $order->update_status('failed');
-        $order->save();
-
-        return wp_send_json_error('Payment failed');
     }
+
+    $order->add_order_note($message ?? 'Intend payment failed');
+    $order->update_status('failed');
+    $order->save();
+
+    return wp_send_json_error('Payment failed');
 }
 
 function webhookRedirect()
@@ -66,10 +65,10 @@ function webhookRedirect()
     if ($order->get_status() === 'processing') {
         wp_redirect($order->get_checkout_order_received_url());
         die();
-    } else {
-        wp_redirect($order->get_cancel_order_url());
-        die();
     }
+
+    wp_redirect($order->get_cancel_order_url());
+    die();
 
 }
 
@@ -208,7 +207,7 @@ function woocommerce_intend()
                 $i++;
                 $html_form .= '<input type="hidden" name="products['.$i.'][id]" value="'.$item->get_product_id().'">';
                 $html_form .= '<input type="hidden" name="products['.$i.'][name]" value="'.$item->get_name().'">';
-                $html_form .= '<input type="hidden" name="products['.$i.'][price]" value="'.((int)($item->get_total() / $item->get_quantity())).'">';
+                $html_form .= '<input type="hidden" name="products['.$i.'][price]" value="'.((int) ($item->get_total() / $item->get_quantity())).'">';
                 $html_form .= '<input type="hidden" name="products['.$i.'][quantity]" value="'.$item->get_quantity().'">';
                 $html_form .= '<input type="hidden" name="products['.$i.'][sku]" value="sku_'.$item->get_product_id().'">';
                 $html_form .= '<input type="hidden" name="products['.$i.'][weight]" value="0">';
@@ -289,7 +288,7 @@ FORM;
 
         /**
          * Responds and terminates request processing.
-         * @param array $response specified response
+         * @param  array  $response  specified response
          */
         private function respond($response)
         {
@@ -303,7 +302,7 @@ FORM;
 
         /**
          * Gets order instance by id.
-         * @param array $payload request payload
+         * @param  array  $payload  request payload
          * @return WC_Order found order by id
          */
         private function get_order(array $payload)
@@ -317,7 +316,7 @@ FORM;
 
         /**
          * Gets order instance by transaction id.
-         * @param array $payload request payload
+         * @param  array  $payload  request payload
          * @return WC_Order found order by id
          */
         private function get_order_by_transaction($payload)
@@ -336,7 +335,7 @@ FORM;
 
         /**
          * Converts amount to coins.
-         * @param float $amount amount value.
+         * @param  float  $amount  amount value.
          * @return int Amount representation in coins.
          */
         private function amount_to_coin($amount)
@@ -355,53 +354,53 @@ FORM;
 
         /**
          * Get order's create time.
-         * @param WC_Order $order order
+         * @param  WC_Order  $order  order
          * @return float create time as timestamp
          */
         private function get_create_time(WC_Order $order)
         {
-            return (double)get_post_meta($order->get_id(), '_intend_create_time', true);
+            return (double) get_post_meta($order->get_id(), '_intend_create_time', true);
         }
 
         /**
          * Get order's perform time.
-         * @param WC_Order $order order
+         * @param  WC_Order  $order  order
          * @return float perform time as timestamp
          */
         private function get_perform_time(WC_Order $order)
         {
-            return (double)get_post_meta($order->get_id(), '_intend_perform_time', true);
+            return (double) get_post_meta($order->get_id(), '_intend_perform_time', true);
         }
 
         /**
          * Get order's cancel time.
-         * @param WC_Order $order order
+         * @param  WC_Order  $order  order
          * @return float cancel time as timestamp
          */
         private function get_cancel_time(WC_Order $order)
         {
-            return (double)get_post_meta($order->get_id(), '_intend_cancel_time', true);
+            return (double) get_post_meta($order->get_id(), '_intend_cancel_time', true);
         }
 
         /**
          * Get order's transaction id
-         * @param WC_Order $order order
+         * @param  WC_Order  $order  order
          * @return string saved transaction id
          */
         private function get_transaction_id(WC_Order $order)
         {
-            return (string)get_post_meta($order->get_id(), '_intend_transaction_id', true);
+            return (string) get_post_meta($order->get_id(), '_intend_transaction_id', true);
         }
 
         private function get_cencel_reason(WC_Order $order)
         {
-            $b_v = (int)get_post_meta($order->get_id(), '_cancel_reason', true);
+            $b_v = (int) get_post_meta($order->get_id(), '_cancel_reason', true);
 
             if ($b_v) {
                 return $b_v;
-            } else {
-                return null;
             }
+
+            return null;
         }
 
     }
@@ -440,8 +439,7 @@ function intend_success_parse_request(&$wp)
         add_action('the_content', [$a, 'showMessage']);
 
         if ($wp->query_vars['intend_success'] == 1) {
-
-            if ($order->get_status() == "pending") {
+            if ($order->get_status() === "pending") {
                 wp_redirect($order->get_cancel_order_url());
             } else {
 
@@ -450,9 +448,7 @@ function intend_success_parse_request(&$wp)
                 $a->msg['class']   = 'woocommerce_message woocommerce_message_info';
                 WC()->cart->empty_cart();
             }
-
         } else {
-
             $a->msg['title']   = __('Intend not paid', 'intend');
             $a->msg['message'] = __('An error occurred during payment. Try again or contact your administrator.', 'intend');
             $a->msg['class']   = 'woocommerce_message woocommerce_message_info';
