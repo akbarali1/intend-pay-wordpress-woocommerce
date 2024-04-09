@@ -73,13 +73,8 @@ class Intend
         $response_json = curl_exec($ch);
         curl_close($ch);
         $response = json_decode($response_json, true);
-        die(var_dump($response));
-        if ($response['success'] === true) {
-            return true;
-        } else {
-            return false;
-        }
 
+        return $response['success'] === true;
     }
 
 
